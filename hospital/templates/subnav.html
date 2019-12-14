@@ -1,0 +1,139 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <a class="navbar-brand" href="{% url 'Index' %}">
+        <img src="{% static 'images/logo.png' %}" width="35" height="30" alt="icon">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-users-cog"></span> Admin
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'accounts:Signup' %}">
+                        <span class="fa fa-user-plus" aria-hidden="true"></span> Users </a>
+                </div>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-tools"></span> Basic Settings
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'dashboard:employee' %}">Employees</a>
+                    <a class="dropdown-item" href="{% url 'dashboard:doctor' %}">Doctors</a>
+                    <a class="dropdown-item" href="{% url 'dashboard:department' %}">Departments</a>
+                    <a class="dropdown-item" href="{% url 'dashboard:room' %}">Rooms</a>
+                    <a class="dropdown-item" href="{% url 'dashboard:drug' %}">Drugs</a>
+                    <a class="dropdown-item" href="{% url 'dashboard:diagnose' %}">Diagnoses</a>
+                    <a class="dropdown-item" href="{% url 'dashboard:laboratory' %}">Laboratories</a>
+                    <a class="dropdown-item" href="{% url 'dashboard:operation' %}">Operations</a>
+                    <a class="dropdown-item" href="{% url 'dashboard:service' %}">Services</a>
+                    <a class="dropdown-item" href="{% url 'dashboard:image' %}">Images</a>
+                    <a class="dropdown-item" href="{% url 'dashboard:sponsor' %}">Sponsors</a>
+                    <a class="dropdown-item" href="{% url 'dashboard:delivery' %}">Deliveries</a>
+                </div>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-dollar-sign"></span> Reception
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'dashboard:patient' %}">Patients</a>
+                    <a class="dropdown-item" href="{% url 'dashboard:ticket' %}">Tickets</a>
+                    <a class="dropdown-item" href="">Quotations</a>
+                    <a class="dropdown-item" href="#">Receipts</a>
+                    <a class="dropdown-item" href="#">Laboratories</a>
+                    <a class="dropdown-item" href="#">Operations</a>
+                    <a class="dropdown-item" href="#">Services</a>
+                    <a class="dropdown-item" href="#">Images</a>
+                    <a class="dropdown-item" href="#">Flow-Up</a>
+                </div>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-user-md"></span> Doctors
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'dashboard:history' %}">History</a>
+                    <a class="dropdown-item" href="#">Laboratory Requests</a>
+                    <a class="dropdown-item" href="#">Operation Requests</a>
+                    <a class="dropdown-item" href="#">Service Requests</a>
+                    <a class="dropdown-item" href="#">Prescriptions</a>
+                    <a class="dropdown-item" href="#">Inpatient</a>
+                    <a class="dropdown-item" href="#">Patient Record</a>
+                    <a class="dropdown-item" href="#">Letters</a>
+                </div>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-microscope"></span> Laboratories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Lab Collections</a>
+                    <a class="dropdown-item" href="#">Lab Examinations</a>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'accounts:Signup' %}">
+                    <span class="fa fa-desktop" aria-hidden="true"></span> Images </a>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-cog"></span> Settings
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Change Password</a>
+                    <a class="dropdown-item" href="#">Inpatient</a>
+                </div>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-capsules"></span> Pharmacy
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Out Patient</a>
+                    <a class="dropdown-item" href="#">In Patient</a>
+                </div>
+            </li>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-scroll"></span> Reports
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Patient Statement</a>
+                </div>
+            </li>
+
+            {% endif%}
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:Logout' %}">
+                    <span class="fa fa-sign-out-alt" aria-hidden="true"></span> Logout </a>
+            </li>
+
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:Login' %}">
+                    <span class="fa fa-sign-in-alt" aria-hidden="true"></span> Login </a>
+            </li>
+            {% endif %}
+        </ul>
+
+    </div>
+</nav>

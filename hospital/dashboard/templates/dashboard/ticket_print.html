@@ -1,0 +1,105 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/glyphicon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}"> <!-- font awesome -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}"> <!-- font awesome -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery.min.js' %}"> </script>
+    <script src="{% static 'js/jquery.js' %}"> </script>
+    <script src="{% static 'js/bootstrap.min.js' %}"> </script>
+
+    <title> Ticket Print Page </title>
+</head>
+
+<body>
+    <div class="container header">
+        <h4 class="text-center">Receipt Voucher</h4>
+        <img src="{% static 'images/Logo.png' %}" id="print-logo">
+        <div class="row">
+            <div class="col-7">
+                <h3>HALLELUJAH GENERAL HOSPITAL</h3>
+                <h4>Addis Ababa, Ethiopia</h4>
+                <h5>info@hallelujah.et</h5>
+                <h5>+251 116 656 666</h5>
+            </div>
+            <div class="col-5"><br><br>
+                <h5>Ref.No. {{ ticket.id }}{{ ticket.ticket_no }}{{ ticket.patient_id }}-IN</h5>
+                <h5>Printed User: {{ user|title }}</h5>
+                <h5>Printed Date: {{today}}</h5>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="container in-body">
+        <table class="table  table-borderless table-lg">
+            <tr>
+                <th>Patient ID:</th>
+                <td>
+                    <p class="border">{{ ticket.patient_id }}</p>
+                </td>
+                <th>Date:</th>
+                <td>
+                    <p class="border"> {{ ticket.created }}</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Patient Name:</th>
+                <td>
+                    <p class="border">{{ ticket.patient }}</p>
+                </td>
+                <th>Doctor:</th>
+                <td>
+                    <p class="border"> {{ ticket.doctor }} </p>
+                </td>
+            </tr>
+            <tr>
+                <th>Being:</th>
+                <td>
+                    <p class="border">{{ being }}</p>
+                </td>
+                <th>Amount:</th>
+                <td>
+                    <p class="border">${{ ticket.value }}</p>
+                </td>
+            </tr>
+            <tr>
+
+                <th>Ticket Number:</th>
+                <td>
+                    <p class="border">{{ ticket.ticket_no }}</p>
+                </td>
+
+
+                <th>Discount:</th>
+                <td>
+                    <p class="border">$0.00</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Patient Signature:</th>
+                <td>
+                    <p class="border">_______________</p>
+                </td>
+                <th>Cashier Signature:</th>
+                <td>
+                    <p class="border">_______________</p>
+                </td>
+            </tr>
+        </table>
+
+        <hr>
+    </div>

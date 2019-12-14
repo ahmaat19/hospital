@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} {% if title %} {{ title }} {% endif %} {% endblock %}
+{% block content %}
+<h1 class="text-center"> {% if title %} {{ title }} {% endif %}</h1>
+<hr>
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-6 mx-auto">
+        <form action="." method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+
+            <div class="form-group">
+                {{ form }}
+            </div>
+            {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% endif %}
+            <div class="form-group float-right">
+                <input type="submit" class="btn btn-primary" value=" {{ valueBtn }} ">
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+{% endblock %}

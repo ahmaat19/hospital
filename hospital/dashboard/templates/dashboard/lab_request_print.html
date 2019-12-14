@@ -1,0 +1,117 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/glyphicon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}"> <!-- font awesome -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}"> <!-- font awesome -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery.min.js' %}"> </script>
+    <script src="{% static 'js/jquery.js' %}"> </script>
+    <script src="{% static 'js/bootstrap.min.js' %}"> </script>
+
+    <title> Lab Request Print Page </title>
+</head>
+
+<body>
+    <div class="container header">
+        <h4 class="text-center">Lab Request</h4>
+        <img src="{% static 'images/Logo.png' %}" id="print-logo">
+        <div class="row">
+            <div class="col-7">
+                <h3>HALLELUJAH GENERAL HOSPITAL</h3>
+                <h4>Addis Ababa, Ethiopia</h4>
+                <h5>info@hallelujah.et</h5>
+                <h5>+251 116 656 666</h5>
+            </div>
+            <div class="col-5"><br><br>
+                <h5>Ref.No. {{ lab_request.id }}{{ lab_request.ticket.patient.id }}-IN</h5>
+                <h5>Printed User: {{ user|title }}</h5>
+                <h5>Printed Date: {{today}}</h5>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="container in-body">
+        <table class="table  table-borderless table-sm">
+            <tr>
+                <th>Patient ID:</th>
+                <td>
+                    <p class="border">{{ lab_request.ticket.patient.id }}</p>
+                    </p>
+                </td>
+                <th>Date:</th>
+                <td>
+                    <p class="border">{{ lab_request.created }}</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Patient Name:</th>
+                <td>
+                    <p class="border">{{ lab_request.ticket.patient }}</p>
+                </td>
+                <th>Reference Number:</th>
+                <td>
+                    <p class="border">{{ lab_request.id }}{{ lab_request.ticket.patient.id }}</p>
+                </td>
+            </tr>
+            <tr>
+                <th>Birth Date:</th>
+                <td>
+                    <p class="border">{{ lab_request.ticket.patient.birth_date }}</p>
+                </td>
+                <th>Gender:</th>
+                <td>
+                    <p class="border">{{ lab_request.ticket.patient.gender }}</p>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <table class="table  border table-sm">
+            <tr>
+                <th>Lab Category</th>
+                <th>Lab Test</th>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        {% for lab in lab_request.lab_test.all %}
+                        <h6> {{lab.group}} </h6>
+                        {% endfor %}
+                    </p>
+                </td>
+                <td>
+                    <p>
+                        {% if lab_request %}
+                        {% for l in lab_request.lab_test.all %}
+                        <h6>{{l}}</h6>
+                        {% endfor %}
+                        {% endif %}
+                    </p>
+                </td>
+            </tr>
+
+        </table>
+        <hr>
+        <h5 class="text-center docSign">{{ lab_request.ticket.doctor }} </h5>
+        <h5 class="text-center"> {{ lab_request.ticket.doctor.title }} </h5>
+        <p class="text-center">_____________________</p>
+
+        <hr>
+    </div>
+
+</body>
+
+</html>

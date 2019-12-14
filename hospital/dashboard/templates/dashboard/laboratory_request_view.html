@@ -1,0 +1,100 @@
+{% extends 'base.html' %} {% block title %} {{ title }} {% endblock %}
+{% block content %}
+
+<h2 class="text-center">{% if title %} {{ title }} {% endif %}</h2>
+<hr />
+
+
+<form class="form my-2 my-lg-0" action="." method="GET" name="q">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search by ID or Name" aria-label="Search" name="q"
+        value="{{ request.GET.q}}">
+</form>
+<div class="row">
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Patient ID</th>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Doctor</th>
+                <th scope="col">Lab Requested Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if not queryset %}
+            {% for lab in labrequest %}
+            <tr>
+                <td> {{ forloop.counter }} </td>
+                <td> {{ lab.ticket.patient.pk }} </td>
+                <td> {{ lab.ticket.patient.name }} </td>
+                <td> {{ lab.ticket.doctor }} </td>
+                <td> {{ lab.created }} </td>
+                <td> <a href=" {% url 'dashboard:laboratory_request_update' lab.pk %} " name="edit"
+                        class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a href="{% url 'dashboard:lab_request_print' lab.pk %}" target="_blank" class="btn btn-dark btn-sm"
+                        data-toggle="tooltip" title="Print Lab Request">
+                        <span class="fa fa-print"></span>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+
+            {% for lab in queryset %}
+            <tr>
+                <td> {{ forloop.counter }} </td>
+                <td> {{ lab.ticket.patient.pk }} </td>
+                <td> {{ lab.ticket.patient.name }} </td>
+                <td> {{ lab.ticket.doctor }} </td>
+                <td> {{ lab.created }} </td>
+                <td> <a href=" {% url 'dashboard:laboratory_request_update' lab.pk %} " name="edit"
+                        class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a href="{% url 'dashboard:lab_request_print' lab.pk %}" target="_blank" class="btn btn-dark btn-sm"
+                        data-toggle="tooltip" title="Print Lab Request">
+                        <span class="fa fa-print"></span>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+
+            {% if labrequest.has_previous %}
+            <li class="page-item"><a href="?page=1" class="page-link"><i class="fa fa-angle-double-left"></i></a>
+            </li>
+            <li class="page-item"><a href="?page={{ labrequest.previous_page_number }}" class="page-link"><i
+                        class="fa fa-angle-right"></i></a>
+            </li>
+            {% endif %}
+
+            <li class="page-item"><a href="#" class="current page-link">
+                    Page {{ labrequest.number }} of {{ labrequest.paginator.num_pages }}.
+                </a></li>
+
+            {% if labrequest.has_next %}
+            <li class="page-item"><a href="?page={{ labrequest.next_page_number }}" class="page-link"><i
+                        class="fa fa-angle-right"></i></a>
+            </li>
+            <li class="page-item"><a href="?page={{ labrequest.paginator.num_pages }}" class="page-link"><i
+                        class="fa fa-angle-double-right"></i> </a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+
+</div>
+<p class="text-right">Total Found {{ title }}: <b> {{ total }} </b></p>
+
+
+
+{% endblock %}

@@ -1,0 +1,83 @@
+body {
+    background: white url("../images/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+
+}
+
+
+.navbar-brand {
+    font-family: Bermuda Script;
+}
+
+.welcome_text {
+    font-family: Bermuda Script;
+    font-size: 72px;
+    color: rgb(11, 97, 29);
+}
+
+.errorlist {
+    color: red;
+}
+
+.errorlist,
+li {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.hordhac {
+    border-left: 2px solid red;
+    border-right: 2px solid red;
+    border-radius: 10px;
+
+}
+
+.form-control {
+    border: none;
+    background-color: transparent;
+    border: 1px solid rgb(168, 115, 253);
+    border-radius: 5px;
+}
+
+.form-control:focus {
+    border: none;
+    box-shadow: none;
+    border: 1px solid rgb(127, 233, 5);
+    border-radius: 0px;
+    background-color: transparent;
+}
+
+.form-control::placeholder {
+    color: rgb(108, 108, 109);
+    padding-left: 4px;
+}
+#print-logo {
+    width: 100px;
+    height: auto;
+}
+.textarea {
+    border: 1px solid rgb(168, 115, 253);
+    border-radius: 2px;
+}
+label {
+    font-weight: bold;
+}
+.sub-nav {
+    background-color: rgba(2, 2, 17, 0.555);
+}
+.border {
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: rgba(66, 65, 65, 0.527);
+    padding-bottom: 5px;
+  }
+  .lab_group {
+    color: rgb(11, 235, 96);
+    font-weight: 500;
+  }
+  .form-check{
+      color: rgba(250, 252, 247, 0.986);
+  }

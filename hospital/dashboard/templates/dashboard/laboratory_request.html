@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block title %} {{ title }} {% endblock %}
+{% block content %}
+
+<h2 class="text-center">{% if title %} {{ title }} {% endif %}</h2>
+<hr />
+
+
+<form action="." method="POST">
+    {% csrf_token %}
+    <div class="row">
+        {% for lab_group in lab_group %}
+        <div class="col-3 border">
+            <label for="">{{ lab_group|upper }}</label>
+            {% for lab in lab_group.lab_set.all %}
+            {% if lab.active == 'Yes' %}
+            <div class="form-check">
+                <input type="checkbox" value="{{ lab.id }}" name="lab_test">
+                {{ lab }}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+    </div>
+    <div class="form-group float-right">
+        <button type="submit" name="submit" class="btn btn-success btn-sm" value=" {{ valueBtn }} "> <i
+                class="fa fa-save"></i>
+            Save</button>
+    </div>
+</form>
+
+<!-- {% if lab_request_id %}
+<label for="">{{lab_request_id.ticket}}</label>
+{% for l in lab_request_id.lab_test.all %}
+<p>{{l}}</p>
+
+{% endfor %}
+
+{% endif %} -->
+
+
+
+
+{% endblock %}

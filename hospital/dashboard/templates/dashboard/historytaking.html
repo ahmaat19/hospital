@@ -1,0 +1,162 @@
+{% extends 'base.html' %} {% block title %} {{ title }} {% endblock %}
+{% block content %}
+
+<h2 class="text-center">{% if title %} {{ title }} {% endif %}</h2>
+<hr />
+{% if surgery_form %}
+<div class="row">
+    <div class="col-8 mx-auto">
+        <form action="." method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="">Cheif Complain</label>
+                {{ surgery_form.cheif_complain }} </div>
+            <div class="form-group">
+                <label for="">Past Medical History</label>
+                <div class="row">
+                    {% for pmh in surgery_form.past_medical_history %}
+                    <div class="col-3 ">
+                        {{ pmh }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <label for="">If Other:</label>
+                {{ surgery_form.other }}
+            </div>
+            <div class="form-group">
+                <label for="">Past Surgical History</label>
+                {{ surgery_form.past_surgical_history }}
+            </div>
+            <div class="form-group">
+                <label for="">Vital Signs</label>
+                <div class="row">
+                    <div class="col-3">
+                        <label for="">BP</label>
+                        {{ surgery_form.bp }}
+                    </div>
+                    <div class="col-3">
+                        <label for="">P</label>
+                        {{ surgery_form.p }}
+                    </div>
+                    <div class="col-3">
+                        <label for="">Temprature</label>
+                        {{ surgery_form.temprature }}
+                    </div>
+                    <div class="col-3">
+                        <label for="">SPO2</label>
+                        {{ surgery_form.spo }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Clinical Examination</label>
+                {{ surgery_form.clinical_examination }}
+            </div>
+            <div class="form-group">
+                <label for="">Provisional Diagnosis</label>
+                {{ surgery_form.diagnose }}
+            </div>
+            <div class="form-group float-right">
+                {% if valueBtn == 'Save' %}
+                <button type="submit" class="btn btn-success btn-sm" value=" {{ valueBtn }} "> <i
+                        class="fa fa-save"></i> Save</button>
+                {% elif valueBtn == 'Update' %}
+                <button type="submit" class="btn btn-success btn-sm" value=" {{ valueBtn }} "> <span
+                        class="glyphicon glyphicon-edit"></span> Update</button>
+                <a href=" {% url 'dashboard:history' %} " class="btn btn-success btn-sm"> <span
+                        class="glyphicon glyphicon-arrow-left"></span></a>
+                {% endif %}
+            </div>
+    </div>
+    </form>
+</div>
+{% endif %}
+
+
+<!-- Surgery History Goes There -->
+{% if docSpec == 'Surgery' %}
+<form class="form my-2 my-lg-0" action="." method="GET" name="q">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search by ID or Name" aria-label="Search" name="q"
+        value="{{ request.GET.q}}">
+</form>
+<div class="row">
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Patient ID</th>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Doctor</th>
+                <th scope="col">History Taken Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if not queryset %}
+            {% for history in history %}
+            <tr>
+                <td> {{ forloop.counter }} </td>
+                <td> {{ history.ticket.patient.pk }} </td>
+                <td> {{ history.ticket.patient.name }} </td>
+                <td> {{ history.ticket.doctor }} </td>
+                <td> {{ history.created }} </td>
+                <td> <a href=" {% url 'dashboard:history_taking_update' history.pk %} " name="edit"
+                        class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+
+            {% for history in queryset %}
+            <tr>
+                <td> {{ forloop.counter }} </td>
+                <td> {{ history.ticket.patient.pk }} </td>
+                <td> {{ history.ticket.patient.name }} </td>
+                <td> {{ history.ticket.doctor }} </td>
+                <td> {{ history.created }} </td>
+                <td> <a href=" {% url 'dashboard:history_taking_update' history.pk %} " name="edit"
+                        class="btn btn-success btn-sm">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+
+            {% if history.has_previous %}
+            <li class="page-item"><a href="?page=1" class="page-link"><i class="fa fa-angle-double-left"></i></a>
+            </li>
+            <li class="page-item"><a href="?page={{ history.previous_page_number }}" class="page-link"><i
+                        class="fa fa-angle-right"></i></a>
+            </li>
+            {% endif %}
+
+            <li class="page-item"><a href="#" class="current page-link">
+                    Page {{ history.number }} of {{ history.paginator.num_pages }}.
+                </a></li>
+
+            {% if history.has_next %}
+            <li class="page-item"><a href="?page={{ history.next_page_number }}" class="page-link"><i
+                        class="fa fa-angle-right"></i></a>
+            </li>
+            <li class="page-item"><a href="?page={{ history.paginator.num_pages }}" class="page-link"><i
+                        class="fa fa-angle-double-right"></i> </a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+
+</div>
+<p class="text-right">Total Found {{ title }}: <b> {{ total }} </b></p>
+{% endif %}
+
+
+{% endblock %}
